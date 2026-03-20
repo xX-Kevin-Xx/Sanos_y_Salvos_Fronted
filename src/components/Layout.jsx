@@ -13,8 +13,8 @@ const Layout = ({ children, currentView, onNavigate }) => {
             <p>Plataforma inteligente para la localización de mascotas perdidas</p>
           </div>
           <div className="layout-header-image">
-            <img 
-              src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=100" 
+            <img
+              src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=100"
               alt="Mascota feliz"
               style={{ borderRadius: '50%', width: '60px', height: '60px', objectFit: 'cover' }}
             />
@@ -25,23 +25,29 @@ const Layout = ({ children, currentView, onNavigate }) => {
       <nav className="layout-nav">
         <div className="layout-nav-content">
           <ul className="layout-nav-list">
-            <li 
+            <li
               className={`layout-nav-item ${currentView === 'inicio' ? 'active' : ''}`}
               onClick={() => onNavigate('inicio')}
             >
               🏠 Inicio
             </li>
-            <li 
+            <li
               className={`layout-nav-item ${currentView === 'lista' ? 'active' : ''}`}
               onClick={() => onNavigate('lista')}
             >
               📋 Ver Mascotas
             </li>
-            <li 
+            <li
               className={`layout-nav-item ${currentView === 'formulario' ? 'active' : ''}`}
               onClick={() => onNavigate('formulario')}
             >
               ➕ Reportar Mascota
+            </li>
+            <li
+              className={`layout-nav-item ${currentView === 'geolocalizacion' ? 'active' : ''}`}
+              onClick={() => onNavigate('geolocalizacion')}
+            >
+              🗺️ Mapa
             </li>
           </ul>
         </div>

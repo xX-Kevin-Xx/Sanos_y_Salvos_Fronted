@@ -1,0 +1,285 @@
+/* styles/Geolocalizacion.css */
+.geo-container {
+  padding: 1rem 0;
+}
+
+.geo-header {
+  display: flex;
+ justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.geo-header h2 {
+  font-size: 1.8rem;
+  color: #2d3748;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.geo-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.geo-filter-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.geo-filter-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Mapa (placeholder mientras no tengas mapa real) */
+.map-placeholder {
+  background: #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  filter: brightness(0.95);
+}
+
+.map-note {
+  background: #f7fafc;
+  padding: 1rem;
+  text-align: center;
+  color: #4a5568;
+  font-size: 0.9rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Lista de ubicaciones */
+.ubicaciones-lista {
+  margin-top: 2rem;
+}
+
+.ubicaciones-lista h3 {
+  font-size: 1.4rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.ubicaciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.ubicacion-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ubicacion-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e0;
+}
+
+.ubicacion-card.selected {
+  border: 2px solid #667eea;
+  background: #f7fafc;
+}
+
+.ubicacion-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.ubicacion-card-header img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ubicacion-card-header h4 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #2d3748;
+}
+
+.ubicacion-estado {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.estado-perdido {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.estado-encontrado {
+  background: #c6f6d5;
+  color: #276749;
+}
+
+.ubicacion-card p {
+  margin: 0.5rem 0;
+  color: #4a5568;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ubicacion-card small {
+  color: #a0aec0;
+  font-size: 0.75rem;
+}
+
+.no-ubicaciones {
+  text-align: center;
+  padding: 3rem;
+  color: #718096;
+  background: #f7fafc;
+  border-radius: 12px;
+}
+
+/* Modal de detalle */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #718096;
+}
+
+.modal-close:hover {
+  color: #2d3748;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-header img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.modal-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #2d3748;
+}
+
+.modal-body p {
+  margin: 0.75rem 0;
+  color: #4a5568;
+}
+
+.modal-body strong {
+  color: #2d3748;
+}
+
+.modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.modal-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.modal-btn-secondary {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.modal-btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 640px) {
+  .geo-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .geo-controls {
+    justify-content: center;
+  }
+  
+  .map-image {
+    height: 250px;
+  }
+}

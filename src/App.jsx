@@ -3,9 +3,10 @@ import Layout from './components/Layout';
 import Inicio from './components/Inicio';
 import MascotaList from './components/MascotaList';
 import MascotaForm from './components/MascotaForm';
+import Geolocalizacion from './components/Geolocalizacion'
 
 function App() {
-  const [vista, setVista] = useState('inicio'); // 'inicio', 'lista', 'formulario'
+  const [vista, setVista] = useState('inicio');
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleMascotaCreada = () => {
@@ -21,6 +22,8 @@ function App() {
         return <MascotaList key={refreshKey} />;
       case 'formulario':
         return <MascotaForm onMascotaCreada={handleMascotaCreada} />;
+      case 'geolocalizacion':
+        return <Geolocalizacion />;
       default:
         return <Inicio onNavigate={setVista} />;
     }

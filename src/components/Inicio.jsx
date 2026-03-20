@@ -12,10 +12,10 @@ const Inicio = ({ onNavigate }) => {
       <div className="inicio-hero">
         <h2>Bienvenido a Sanos y Salvos 🐾</h2>
         <p>
-          Una plataforma inteligente para ayudar a reunir mascotas perdidas 
+          Una plataforma inteligente para ayudar a reunir mascotas perdidas
           con sus familias
         </p>
-        
+
         <div className="inicio-stats">
           <div className="stat-item">
             <span className="stat-number">{totalMascotas}</span>
@@ -42,10 +42,10 @@ const Inicio = ({ onNavigate }) => {
           <div className="menu-card-icon">🐕</div>
           <h3>Gestión de Mascotas</h3>
           <p>
-            Registra mascotas perdidas o encontradas, consulta reportes 
+            Registra mascotas perdidas o encontradas, consulta reportes
             y mantén actualizada la información.
           </p>
-          <button 
+          <button
             className="menu-card-button"
             onClick={() => onNavigate('lista')}
           >
@@ -53,17 +53,18 @@ const Inicio = ({ onNavigate }) => {
           </button>
         </div>
 
-        {/* Módulo 2: Geolocalización (PRÓXIMAMENTE) */}
-        <div className="menu-card coming-soon">
-          <span className="coming-soon-badge">Próximamente</span>
+        <div className="menu-card">
           <div className="menu-card-icon">📍</div>
           <h3>Sistema de Geolocalización</h3>
           <p>
             Visualiza en un mapa los reportes de mascotas perdidas y encontradas,
             identifica zonas con mayor incidencia.
           </p>
-          <button className="menu-card-button" disabled style={{ opacity: 0.5 }}>
-            En desarrollo
+          <button
+            className="menu-card-button"
+            onClick={() => onNavigate('geolocalizacion')}
+          >
+            Ver Mapa
           </button>
         </div>
 
@@ -87,7 +88,7 @@ const Inicio = ({ onNavigate }) => {
         <p style={{ color: '#718096', marginBottom: '1rem' }}>
           ¿Encontraste una mascota o perdiste la tuya?
         </p>
-        <button 
+        <button
           onClick={() => onNavigate('formulario')}
           style={{
             background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
