@@ -32,7 +32,7 @@ const Inicio = ({ onNavigate }) => {
         </div>
       </div>
 
-      <h3 style={{ textAlign: 'center', color: '#2d3748', marginBottom: '2rem' }}>
+      <h3 style={{ textAlign: 'center', color: '#ffffff', marginBottom: '2rem' }}>
         ¿Qué deseas hacer hoy?
       </h3>
 
