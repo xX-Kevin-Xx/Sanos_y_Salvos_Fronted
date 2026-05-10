@@ -1,7 +1,11 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/Layout.css';
 
-const Layout = ({ children, currentView, onNavigate }) => {
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <>
       <header className="layout-header">
@@ -25,30 +29,18 @@ const Layout = ({ children, currentView, onNavigate }) => {
       <nav className="layout-nav">
         <div className="layout-nav-content">
           <ul className="layout-nav-list">
-            <li
-              className={`layout-nav-item ${currentView === 'inicio' ? 'active' : ''}`}
-              onClick={() => onNavigate('inicio')}
-            >
-              🏠 Inicio
-            </li>
-            <li
-              className={`layout-nav-item ${currentView === 'lista' ? 'active' : ''}`}
-              onClick={() => onNavigate('lista')}
-            >
-              📋 Ver Mascotas
-            </li>
-            <li
-              className={`layout-nav-item ${currentView === 'formulario' ? 'active' : ''}`}
-              onClick={() => onNavigate('formulario')}
-            >
-              ➕ Reportar Mascota
-            </li>
-            <li
-              className={`layout-nav-item ${currentView === 'geolocalizacion' ? 'active' : ''}`}
-              onClick={() => onNavigate('geolocalizacion')}
-            >
-              🗺️ Mapa
-            </li>
+            <Link to="/" className={`layout-nav-item ${currentPath === '/' ? 'active' : ''}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <li>🏠 Inicio</li>
+            </Link>
+            <Link to="/publicaciones" className={`layout-nav-item ${currentPath.includes('/publicaciones') ? 'active' : ''}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <li>📋 Ver Mascotas</li>
+            </Link>
+            <Link to="/reportar" className={`layout-nav-item ${currentPath === '/reportar' ? 'active' : ''}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <li>➕ Reportar Mascota</li>
+            </Link>
+            <Link to="/mapa" className={`layout-nav-item ${currentPath === '/mapa' ? 'active' : ''}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <li>🗺️ Mapa</li>
+            </Link>
           </ul>
         </div>
       </nav>

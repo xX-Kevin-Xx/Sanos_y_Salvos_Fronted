@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import '../styles/MascotaForm.css';
 import { PublicacionService } from '../services/publicacionService';
 
-const MascotaForm = ({ onMascotaCreada }) => {
+const MascotaForm = () => {
+  const navigate = useNavigate(); // 🚀 Hook de navegación
 
   const [formData, setFormData] = useState({
-    titulo: '',
-    nombre: '',
-    tipo: 'Perro',
-    color: '',
-    tamaño: 'mediano',
-    estado: 'perdido',
-    ubicacion: '',
+    titulo: '', nombre: '', tipo: 'Perro', color: '',
+    tamaño: 'mediano', estado: 'perdido', ubicacion: '',
     fecha: new Date().toISOString().split('T')[0], 
-    descripcion: '',
-    nombreContacto: '',
-    telefonoContacto: ''
+    descripcion: '', nombreContacto: '', telefonoContacto: ''
   });
 
   const [mensaje, setMensaje] = useState({ tipo: '', texto: '' });
@@ -36,44 +30,26 @@ const MascotaForm = ({ onMascotaCreada }) => {
     
     try {
       const payloadBFF = {
-        titulo: formData.titulo,
-        nombre: formData.nombre,
-        tipo: formData.tipo,
-        color: formData.color,
+        titulo: formData.titulo, nombre: formData.nombre,
+        tipo: formData.tipo, color: formData.color,
         tamaño: formData.tamaño === 'pequeño' ? 5.0 : formData.tamaño === 'mediano' ? 15.0 : 30.0,
-        estado: formData.estado, 
-        ubicacion: formData.ubicacion,
-        fecha: formData.fecha,
-        descripcion: formData.descripcion,
-        nombreContacto: formData.nombreContacto,
-        telefonoContacto: formData.telefonoContacto,
+        estado: formData.estado, ubicacion: formData.ubicacion,
+        fecha: formData.fecha, descripcion: formData.descripcion,
+        nombreContacto: formData.nombreContacto, telefonoContacto: formData.telefonoContacto,
         usuarioId: "2df6d4ba-ef5e-4ad3-a148-ecb48ff8f933", 
-        latitud: -33.68,
-        longitud: -71.21
+        latitud: -33.68, longitud: -71.21
       };
 
       await PublicacionService.crearReporteOrquestado(payloadBFF);
 
       setMensaje({
         tipo: 'success',
-        texto: '✅ ¡Reporte publicado exitosamente!'
+        texto: '✅ ¡Reporte publicado exitosamente! Redirigiendo...'
       });
       
-      setFormData({
-        titulo: '', 
-        nombre: '', 
-        tipo: 'Perro', 
-        color: '', 
-        tamaño: 'mediano',
-        estado: 'perdido', 
-        ubicacion: '', 
-        fecha: new Date().toISOString().split('T')[0],
-        descripcion: '', 
-        nombreContacto: '', 
-        telefonoContacto: ''
-      });
-      
-      if (onMascotaCreada) onMascotaCreada();
+      setTimeout(() => {
+        navigate('/publicaciones');
+      }, 2000);
 
     } catch (error) {
       console.error("Error al crear el reporte:", error);
@@ -83,8 +59,6 @@ const MascotaForm = ({ onMascotaCreada }) => {
       });
     } finally {
       setEnviando(false);
-      // Ocultar mensaje después de 5 segundos
-      setTimeout(() => setMensaje({ tipo: '', texto: '' }), 5000);
     }
   };
 
@@ -99,9 +73,7 @@ const MascotaForm = ({ onMascotaCreada }) => {
         <div 
           className={`form-message ${mensaje.tipo === 'success' ? 'form-message-success' : 'form-message-error'}`} 
           style={{ 
-            padding: '10px', 
-            marginBottom: '15px', 
-            borderRadius: '5px', 
+            padding: '10px', marginBottom: '15px', borderRadius: '5px', 
             backgroundColor: mensaje.tipo === 'success' ? '#d4edda' : '#f8d7da',
             color: mensaje.tipo === 'success' ? '#155724' : '#721c24'
           }}
@@ -111,32 +83,15 @@ const MascotaForm = ({ onMascotaCreada }) => {
       )}
 
       <form onSubmit={handleSubmit} className="mascota-form">
-        
         <div className="form-group">
           <label>Título del reporte <span className="required">*</span></label>
-          <input
-            type="text"
-            name="titulo"
-            value={formData.titulo}
-            onChange={handleChange}
-            placeholder="Ej: Busco a mi perrito Luna / Encontré un gatito gris"
-            required
-          />
+          <input type="text" name="titulo" value={formData.titulo} onChange={handleChange} placeholder="Ej: Busco a mi perrito Luna" required />
         </div>
-
         <div className="form-row">
           <div className="form-group">
             <label>Nombre de la mascota <span className="required">*</span></label>
-            <input
-              type="text"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-              placeholder="Ej: Luna (o 'Desconocido' si no sabes)"
-              required
-            />
+            <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
           </div>
-          
           <div className="form-group">
             <label>Tipo <span className="required">*</span></label>
             <select name="tipo" value={formData.tipo} onChange={handleChange}>
@@ -146,19 +101,11 @@ const MascotaForm = ({ onMascotaCreada }) => {
             </select>
           </div>
         </div>
-
         <div className="form-row">
           <div className="form-group">
             <label>Color</label>
-            <input
-              type="text"
-              name="color"
-              value={formData.color}
-              onChange={handleChange}
-              placeholder="Ej: Marrón con manchas"
-            />
+            <input type="text" name="color" value={formData.color} onChange={handleChange} />
           </div>
-          
           <div className="form-group">
             <label>Tamaño</label>
             <select name="tamaño" value={formData.tamaño} onChange={handleChange}>
@@ -168,7 +115,6 @@ const MascotaForm = ({ onMascotaCreada }) => {
             </select>
           </div>
         </div>
-
         <div className="form-row">
           <div className="form-group">
             <label>Estado <span className="required">*</span></label>
@@ -177,78 +123,34 @@ const MascotaForm = ({ onMascotaCreada }) => {
               <option value="encontrado">✅ Encontrado</option>
             </select>
           </div>
-
           <div className="form-group">
             <label>Fecha de extravío/encuentro <span className="required">*</span></label>
-            <input
-              type="date"
-              name="fecha"
-              value={formData.fecha}
-              onChange={handleChange}
-              required
-            />
+            <input type="date" name="fecha" value={formData.fecha} onChange={handleChange} required />
           </div>
         </div>
-
         <div className="form-group">
           <label>Ubicación de referencia <span className="required">*</span></label>
-          <input
-            type="text"
-            name="ubicacion"
-            value={formData.ubicacion}
-            onChange={handleChange}
-            placeholder="Ej: Providencia, cerca del parque"
-            required
-          />
+          <input type="text" name="ubicacion" value={formData.ubicacion} onChange={handleChange} required />
         </div>
-
         <div className="form-group">
           <label>Descripción detallada</label>
-          <textarea
-            name="descripcion"
-            value={formData.descripcion}
-            onChange={handleChange}
-            placeholder="Señas particulares, comportamiento, si lleva collar, etc."
-            rows="3"
-          />
+          <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} rows="3" />
         </div>
-
         <div className="form-row">
           <div className="form-group">
             <label>Tu Nombre <span className="required">*</span></label>
-            <input
-              type="text"
-              name="nombreContacto"
-              value={formData.nombreContacto}
-              onChange={handleChange}
-              placeholder="Ej: Juan Pérez"
-              required
-            />
+            <input type="text" name="nombreContacto" value={formData.nombreContacto} onChange={handleChange} required />
           </div>
           <div className="form-group">
             <label>Teléfono <span className="required">*</span></label>
-            <input
-              type="text"
-              name="telefonoContacto"
-              value={formData.telefonoContacto}
-              onChange={handleChange}
-              placeholder="Ej: +56912345678"
-              required
-            />
+            <input type="text" name="telefonoContacto" value={formData.telefonoContacto} onChange={handleChange} required />
           </div>
         </div>
-
         <div className="form-actions" style={{ marginTop: '20px' }}>
-          <button 
-            type="submit" 
-            className="btn-primary"
-            disabled={enviando}
-            style={{ width: '100%', padding: '12px', fontSize: '16px' }}
-          >
+          <button type="submit" className="btn-primary" disabled={enviando} style={{ width: '100%', padding: '12px', fontSize: '16px' }}>
             {enviando ? 'Guardando reporte...' : '📢 Publicar Reporte'}
           </button>
         </div>
-
       </form>
     </div>
   );

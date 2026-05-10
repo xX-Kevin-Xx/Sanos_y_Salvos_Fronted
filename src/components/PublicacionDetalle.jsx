@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
+import { useParams, useNavigate } from 'react-router-dom'; 
 import '../styles/PublicacionDetalle.css'; 
 import { PublicacionService } from '../services/publicacionService';
 
-const PublicacionDetalle = ({ id, onVolver }) => {
+const PublicacionDetalle = () => {
+  const { id } = useParams(); 
+  const navigate = useNavigate();
+
   const [datos, setDatos] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,7 +45,8 @@ const PublicacionDetalle = ({ id, onVolver }) => {
 
   return (
     <div className="detalle-container">
-      <button className="btn-volver" onClick={onVolver}>
+
+      <button className="btn-volver" onClick={() => navigate(-1)}>
         ⬅ Volver a la lista
       </button>
 
@@ -53,7 +57,6 @@ const PublicacionDetalle = ({ id, onVolver }) => {
             {publicacion.tipoPublicacion === 'PERDIDA' ? '🐾 Se Busca' : '✅ Encontrado'}
           </span>
         </div>
-
         <div className="detalle-content-grid">
           <div className="detalle-seccion">
             <h3>📝 Datos de la Mascota</h3>
@@ -68,7 +71,6 @@ const PublicacionDetalle = ({ id, onVolver }) => {
               </ul>
             )}
           </div>
-
           <div className="detalle-seccion">
             <h3>📍 Detalles del Reporte</h3>
             <ul className="detalle-lista">
@@ -78,12 +80,10 @@ const PublicacionDetalle = ({ id, onVolver }) => {
             </ul>
           </div>
         </div>
-
         <div className="detalle-seccion descripcion-seccion">
           <h3>Detalles Adicionales</h3>
           <p>{publicacion.descripcion || 'No se proporcionaron detalles adicionales.'}</p>
         </div>
-
         <div className="detalle-contacto">
           <h3>📞 Información de Contacto</h3>
           <div className="contacto-info">
