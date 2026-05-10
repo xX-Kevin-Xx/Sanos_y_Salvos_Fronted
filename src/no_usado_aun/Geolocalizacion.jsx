@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { geoService } from '../services/geolocalizacionApi';
+import { geoService } from './geolocalizacionApi';
 import '../styles/Geolocalizacion.css';
 import MapaInteractivo from './MapaInteractivo';
 

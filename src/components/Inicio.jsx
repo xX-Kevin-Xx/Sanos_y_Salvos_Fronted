@@ -1,11 +1,32 @@
-import React from 'react';
-import { mascotasMock } from '../data/mascotasMock';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
+import { PublicacionService } from '../services/publicacionService'; // 🚀 Importamos tu servicio
 import '../styles/Inicio.css';
 
-const Inicio = ({ onNavigate }) => {
-  const totalMascotas = mascotasMock.length;
-  const perdidos = mascotasMock.filter(m => m.estado === 'perdido').length;
-  const encontrados = mascotasMock.filter(m => m.estado === 'encontrado').length;
+const Inicio = () => {
+  const navigate = useNavigate(); 
+
+  const [publicaciones, setPublicaciones] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEstadisticas = async () => {
+      try {
+        const data = await PublicacionService.getAll();
+        setPublicaciones(data);
+      } catch (error) {
+        console.error("Error al cargar las estadísticas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEstadisticas();
+  }, []);
+
+  const totalMascotas = publicaciones.length;
+  const perdidos = publicaciones.filter(p => p.tipoPublicacion === 'PERDIDA').length;
+  const encontrados = publicaciones.filter(p => p.tipoPublicacion === 'ENCONTRADA').length;
 
   return (
     <div className="inicio-container">
@@ -18,15 +39,21 @@ const Inicio = ({ onNavigate }) => {
 
         <div className="inicio-stats">
           <div className="stat-item">
-            <span className="stat-number">{totalMascotas}</span>
+            <span className="stat-number">
+              {loading ? '...' : totalMascotas}
+            </span>
             <span className="stat-label">Total Reportes</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number" style={{ color: '#e53e3e' }}>{perdidos}</span>
+            <span className="stat-number" style={{ color: '#e53e3e' }}>
+              {loading ? '...' : perdidos}
+            </span>
             <span className="stat-label">Mascotas Perdidas</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number" style={{ color: '#38a169' }}>{encontrados}</span>
+            <span className="stat-number" style={{ color: '#38a169' }}>
+              {loading ? '...' : encontrados}
+            </span>
             <span className="stat-label">Mascotas Encontradas</span>
           </div>
         </div>
@@ -37,7 +64,6 @@ const Inicio = ({ onNavigate }) => {
       </h3>
 
       <div className="inicio-menu">
-        {/* Módulo 1: Gestión de Mascotas (ACTIVO) */}
         <div className="menu-card">
           <div className="menu-card-icon">🐕</div>
           <h3>Gestión de Mascotas</h3>
@@ -47,7 +73,7 @@ const Inicio = ({ onNavigate }) => {
           </p>
           <button
             className="menu-card-button"
-            onClick={() => onNavigate('lista')}
+            onClick={() => navigate('/publicaciones')} // 🚀 Nueva ruta
           >
             Ver Mascotas
           </button>
@@ -62,13 +88,12 @@ const Inicio = ({ onNavigate }) => {
           </p>
           <button
             className="menu-card-button"
-            onClick={() => onNavigate('geolocalizacion')}
+            onClick={() => navigate('/mapa')} // 🚀 Nueva ruta
           >
             Ver Mapa
           </button>
         </div>
 
-        {/* Módulo 3: Motor de Coincidencias (PRÓXIMAMENTE) */}
         <div className="menu-card coming-soon">
           <span className="coming-soon-badge">Próximamente</span>
           <div className="menu-card-icon">🤖</div>
@@ -83,13 +108,12 @@ const Inicio = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Botón rápido para reportar */}
       <div style={{ textAlign: 'center', marginTop: '3rem' }}>
         <p style={{ color: '#718096', marginBottom: '1rem' }}>
           ¿Encontraste una mascota o perdiste la tuya?
         </p>
         <button
-          onClick={() => onNavigate('formulario')}
+          onClick={() => navigate('/reportar')} // 🚀 Nueva ruta
           style={{
             background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
             color: 'white',
