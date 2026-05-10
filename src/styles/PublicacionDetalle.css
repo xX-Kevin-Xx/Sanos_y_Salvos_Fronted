@@ -1,0 +1,133 @@
+.detalle-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.btn-volver {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.btn-volver:hover {
+  color: #000;
+}
+
+.detalle-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.detalle-header {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detalle-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.badge-estado {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.badge-perdida {
+  background-color: #dc3545;
+}
+
+.badge-encontrada {
+  background-color: #28a745;
+}
+
+.detalle-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+
+.detalle-seccion h3 {
+  color: #444;
+  margin-top: 0;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.detalle-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detalle-lista li {
+  margin-bottom: 0.8rem;
+  color: #555;
+}
+
+.descripcion-seccion {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.descripcion-seccion p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.detalle-contacto {
+  background-color: #e9ecef;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.contacto-info {
+  margin-bottom: 1rem;
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  background-color: #25D366;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5d;
+}
+
+.loading-detalle, .error-detalle {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+}
+
+.mascota-error {
+  color: #dc3545;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .detalle-content-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
