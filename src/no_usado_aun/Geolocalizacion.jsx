@@ -71,7 +71,7 @@ const Geolocalizacion = () => {
     setSelectedUbicacion(null);
   };
 
-  const abrirEnGoogleMaps = (lat, lng, direccion) => {
+  const abrirEnGoogleMaps = (lat, lng) => {
     const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
     window.open(url, '_blank');
   };
